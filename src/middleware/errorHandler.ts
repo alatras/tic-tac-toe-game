@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import winston from 'winston';
 
 const logger = winston.createLogger({
@@ -11,6 +11,7 @@ export const errorHandler = (
   err: Error,
   req: Request,
   res: Response,
+  _next: NextFunction
 ): void => {
   logger.error({
     message: err.message,

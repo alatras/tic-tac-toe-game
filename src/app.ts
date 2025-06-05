@@ -10,28 +10,30 @@ import { errorHandler } from './middleware/errorHandler';
 
 const app = express();
 
-// Middleware
 app.use(helmet());
 app.use(cors({
   origin: config.corsOrigin
 }));
 app.use(express.json());
 
-// API Documentation
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-// Routes
 app.use('/api/game', gameRoutes);
 
-// Health check
 app.get('/health', (_req, res) => {
   res.json({ status: 'OK', timestamp: new Date().toISOString() });
 });
 
-// Error handling
+app.use((req, res, _next) => {
+  res.status(404).json({
+    error: {
+      message: `Cannot ${req.method} ${req.originalUrl}`
+    }
+  });
+});
+
 app.use(errorHandler);
 
-// Start server
 const startServer = async () => {
   try {
     await connectDB();
