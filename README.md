@@ -11,7 +11,7 @@ A professional Node.js/TypeScript backend system for a dynamic Tic Tac Toe game 
 - **RESTful API**: Well-documented endpoints with Swagger/OpenAPI
 - **Docker Support**: Fully containerized with Docker Compose
 - **Comprehensive Testing**: Unit and integration test coverage
-- **TypeScript**: Full type safety and modern development experience
+- **Live Game**: Front-end component for testing APIs and playing games against AI pod
 
 ## Prerequisites
 
@@ -41,7 +41,7 @@ cp .env.example .env
 # Edit .env with your configuration and include OpenAI API key
 ```
 
-4. Run the backend application _(you need MongoDB running locally)_:
+4. Run the backend application for development:
 
 ```bash
 # Development mode
@@ -50,14 +50,14 @@ npm run dev
 
 ## Docker Deployment
 
-Run the entire stack with Docker Compose:
+Run the entire stack (backend, frontend, and MongoDB) with Docker Compose:
 
 ```bash
 # Set your OpenAI API key
 export OPENAI_API_KEY=openai_api_key
 
 # Start all services
-docker-compose up -d
+docker-compose up --build -d
 
 # View logs
 docker-compose logs -f
@@ -66,12 +66,12 @@ docker-compose logs -f
 docker-compose down
 ```
 
-### Frontend Component
+## Frontend Component
 
 The application includes a React-based frontend component that serves as a testing interface for the APIs. When using Docker Compose, the frontend is accessible at:
 
 ```
-http://localhost/
+http://localhost
 ```
 
 This frontend provides a user-friendly way to interact with the Tic Tac Toe game APIs and test their functionality.
@@ -256,7 +256,7 @@ src/
 └── app.ts          # Application entry point
 ```
 
-### Architecture Decisions
+### Architecture
 
 - Service Layer Pattern: Separation of concerns between controllers and business logic
 - TypeScript: Strong typing for better maintainability and developer experience
@@ -278,13 +278,6 @@ src/
 - AI requests have timeout protection
 - Efficient game state evaluation algorithms
 - Connection pooling for MongoDB
-
-### Security
-
-- Helmet.js for security headers
-- CORS configuration
-- Input validation on all endpoints
-- Environment variable protection
 
 ### License
 
