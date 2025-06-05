@@ -11,15 +11,13 @@ export class GameService {
   }
   
   async evaluateGame(gameState: GameState): Promise<GameResult> {
-    // Validate game state
-    if (!GameLogicService.validateGameState(gameState)) {
-      throw new Error('Invalid game state');
+    const validationResult = GameLogicService.validateGameState(gameState);
+    if (validationResult !== true) {
+      throw new Error(`Invalid game state: ${validationResult}`);
     }
     
-    // Evaluate the game
     const result = GameLogicService.evaluateGameState(gameState);
     
-    // If game is over, save to database
     if (result.winner) {
       await this.saveCompletedGame(result);
     }
@@ -27,6 +25,16 @@ export class GameService {
     return result;
   }
   
+  /**
+   * Retrieves the list of completed games from the database
+   * 
+   * @remarks
+   * This function retrieves the list of completed games from the database,
+   * sorted by creation date in descending order, and returns the first 100 games.
+   * 
+   * The function returns an array of completed game objects, each containing
+   * the game ID, winner, grid size, final board, winning line, and creation date.
+   */
   async getCompletedGames(): Promise<CompletedGame[]> {
     const games = await Game.find()
       .sort({ createdAt: -1 })
@@ -44,13 +52,25 @@ export class GameService {
   }
   
   async getAIMove(gameState: GameState) {
-    if (!GameLogicService.validateGameState(gameState)) {
-      throw new Error('Invalid game state');
+    const validationResult = GameLogicService.validateGameState(gameState);
+    if (validationResult !== true) {
+      throw new Error(`Invalid game state: ${validationResult}`);
     }
     
     return this.aiService.getAIMove(gameState);
   }
   
+  /**
+   * Saves the completed game to the database
+   * 
+   * @remarks
+   * This function receives the game result (winner, grid size, final board, winning line),
+   * validates the game result, and saves the completed game to the database.
+   * 
+   * The function validates the game result, checks for winning conditions (rows, columns,
+   * diagonals), and returns appropriate game status information including whether the 
+   * game is over, who won, the winning line coordinates, and a human-readable message.
+   */
   private async saveCompletedGame(result: GameResult): Promise<void> {
     if (!result.winner) return;
     

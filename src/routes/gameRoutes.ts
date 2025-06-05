@@ -1,6 +1,6 @@
-import { Router } from 'express';
-import { GameController } from '../controllers/gameController';
-import { body, validationResult } from 'express-validator';
+import { Router } from "express";
+import { GameController } from "../controllers/gameController";
+import { body, validationResult } from "express-validator";
 
 const router = Router();
 const gameController = new GameController();
@@ -39,7 +39,16 @@ const handleValidationErrors = (req: any, res: any, next: any) => {
  *           type: integer
  *           minimum: 3
  *           maximum: 10
- *     
+ *       example:
+ *         board:
+ *           - [null, null, null, null, null]
+ *           - [null, null, null, null, null]
+ *           - [null, "X", null, null, null]
+ *           - [null, null, null, null, null]
+ *           - [null, null, null, null, null]
+ *         currentPlayer: "O"
+ *         gridSize: 5
+ *
  *     EvaluateGameResponse:
  *       type: object
  *       properties:
@@ -59,7 +68,7 @@ const handleValidationErrors = (req: any, res: any, next: any) => {
  *                 type: integer
  *         message:
  *           type: string
- *     
+ *
  *     CompletedGame:
  *       type: object
  *       properties:
@@ -117,12 +126,12 @@ const handleValidationErrors = (req: any, res: any, next: any) => {
  *         description: Invalid input
  */
 router.post(
-  '/evaluate',
+  "/evaluate",
   [
-    body('gameState').isObject(),
-    body('gameState.board').isArray(),
-    body('gameState.currentPlayer').isIn(['X', 'O']),
-    body('gameState.gridSize').isInt({ min: 3, max: 10 })
+    body("gameState").isObject(),
+    body("gameState.board").isArray(),
+    body("gameState.currentPlayer").isIn(["X", "O"]),
+    body("gameState.gridSize").isInt({ min: 3, max: 10 }),
   ],
   handleValidationErrors,
   gameController.evaluateGame
@@ -147,7 +156,7 @@ router.post(
  *                   items:
  *                     $ref: '#/components/schemas/CompletedGame'
  */
-router.get('/completed', gameController.getCompletedGames);
+router.get("/completed", gameController.getCompletedGames);
 
 /**
  * @swagger
@@ -181,12 +190,12 @@ router.get('/completed', gameController.getCompletedGames);
  *                       type: integer
  */
 router.post(
-  '/ai-move',
+  "/ai-move",
   [
-    body('gameState').isObject(),
-    body('gameState.board').isArray(),
-    body('gameState.currentPlayer').isIn(['X', 'O']),
-    body('gameState.gridSize').isInt({ min: 3, max: 10 })
+    body("gameState").isObject(),
+    body("gameState.board").isArray(),
+    body("gameState.currentPlayer").isIn(["X", "O"]),
+    body("gameState.gridSize").isInt({ min: 3, max: 10 }),
   ],
   handleValidationErrors,
   gameController.getAIMove

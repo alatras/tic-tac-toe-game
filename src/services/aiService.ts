@@ -11,6 +11,17 @@ export class AIService {
     });
   }
   
+  /**
+   * Retrieves the AI move suggestion for the current game state
+   * 
+   * @remarks
+   * This function receives the current game state (board, current player, grid size),
+   * validates the game state, and returns the AI move suggestion.
+   * 
+   * The function validates the game state, checks for winning conditions (rows, columns,
+   * diagonals), and returns appropriate game status information including whether the 
+   * game is over, who won, the winning line coordinates, and a human-readable message.
+   */
   async getAIMove(gameState: GameState): Promise<AIMoveSuggestion> {
     const prompt = this.buildPrompt(gameState);
     
