@@ -118,7 +118,7 @@ describe('GameLogicService', () => {
         gridSize: 1
       };
       
-      expect(GameLogicService.validateGameState(gameState)).toBe(false);
+      expect(GameLogicService.validateGameState(gameState)).toBe("gridSize must be between 3 and 10");
     });
     
     it('should reject mismatched board size', () => {
@@ -131,7 +131,7 @@ describe('GameLogicService', () => {
         gridSize: 3
       };
       
-      expect(GameLogicService.validateGameState(gameState)).toBe(false);
+      expect(GameLogicService.validateGameState(gameState)).toBe("board must have exactly 3 rows (found 2)");
     });
   });
 });

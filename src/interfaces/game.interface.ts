@@ -39,3 +39,39 @@ export interface AIMoveSuggestion {
   move: GameMove;
   reasoning?: string;
 }
+
+export interface StartAIGameRequest {
+  mode: 'ai'; // To differentiate from other potential game modes in the future
+  playerSymbol?: 'X' | 'O';
+  gridSize: number;
+}
+
+export interface StartAIGameResponse {
+  gameId: string;
+  board: (string | null)[][];
+  currentPlayer: 'X' | 'O';
+  aiSymbol: 'X' | 'O';
+  gridSize: number;
+}
+
+export interface AIGameState extends GameState {
+  gameId: string;
+  humanSymbol: 'X' | 'O';
+  aiSymbol: 'X' | 'O';
+  status: 'ongoing' | 'win' | 'loss' | 'draw';
+  winner?: 'X' | 'O' | 'draw' | null;
+}
+
+export interface PlayerMoveRequest extends GameMove {
+  // Inherits row and col from GameMove
+}
+
+export interface AIGameMoveResponse {
+  board: (string | null)[][];
+  currentPlayer: 'X' | 'O'; // Who should make the next move
+  status: 'ongoing' | 'win' | 'loss' | 'draw';
+  winner?: 'X' | 'O' | 'draw' | null;
+  aiSymbol: 'X' | 'O';
+  gridSize: number;
+  message?: string;
+}

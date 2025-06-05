@@ -24,8 +24,8 @@ A professional Node.js/TypeScript backend system for a dynamic Tic Tac Toe game 
 
 1. Clone the repository:
 ```bash
-git clone <repository-url>
-cd tic-tac-toe-backend
+git clone https://github.com/alexa/TicTacToeGame.git
+cd TicTacToeGame
 ```
 
 2. Install dependencies:
@@ -38,10 +38,10 @@ npm install
 
 ```bash
 cp .env.example .env
-# Edit .env with your configuration
+# Edit .env with your configuration and include OpenAI API key
 ```
 
-4. Run the application:
+4. Run the backend application _(you need MongoDB running locally)_:
 
 ```bash
 # Development mode
@@ -65,6 +65,16 @@ docker-compose logs -f
 # Stop services
 docker-compose down
 ```
+
+### Frontend Component
+
+The application includes a React-based frontend component that serves as a testing interface for the APIs. When using Docker Compose, the frontend is accessible at:
+
+```
+http://localhost/
+```
+
+This frontend provides a user-friendly way to interact with the Tic Tac Toe game APIs and test their functionality.
 
 ## API Endpoints
 
@@ -147,6 +157,66 @@ Gets AI move suggestion for the current game state.
     "row": 0,
     "col": 1
   }
+}
+```
+
+### POST /api/game/start
+
+Starts a new game against AI opponent.
+
+#### Request Body:
+
+```json
+{
+  "mode": "ai",
+  "playerSymbol": "X",
+  "gridSize": 3
+}
+```
+
+#### Response:
+
+```json
+{
+  "gameId": "68565578-4346-44c3-b8f6-5bc622474f18",
+  "board": [
+    [null, null, null],
+    [null, null, null],
+    [null, null, null]
+  ],
+  "currentPlayer": "X",
+  "aiSymbol": "O",
+  "gridSize": 3
+}
+```
+
+### POST /api/game/{gameId}/move
+
+Makes a player move against AI opponent. The AI will automatically respond with its move.
+
+#### Request Body:
+
+```json
+{
+  "row": 0,
+  "col": 0
+}
+```
+
+#### Response:
+
+```json
+{
+  "board": [
+    ["X", null, "O"],
+    [null, null, null],
+    [null, null, null]
+  ],
+  "currentPlayer": "X",
+  "status": "ongoing",
+  "winner": null,
+  "aiSymbol": "O",
+  "gridSize": 3
 }
 ```
 

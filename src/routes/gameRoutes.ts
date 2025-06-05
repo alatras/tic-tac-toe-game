@@ -201,4 +201,146 @@ router.post(
   gameController.getAIMove
 );
 
+/**
+ * @swagger
+ * /api/game/start:
+ *   post:
+ *     summary: Start a new game against the AI
+ *     tags: [Game]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               mode:
+ *                 type: string
+ *                 enum: [ai]
+ *                 description: Mode of the game
+ *               playerSymbol:
+ *                 type: string
+ *                 enum: ['X', 'O']
+ *                 description: Player's chosen symbol (optional)
+ *               gridSize:
+ *                 type: integer
+ *                 minimum: 3
+ *                 maximum: 10
+ *                 description: Size of the game grid (e.g., 3 for 3x3)
+ *             required:
+ *               - mode
+ *               - gridSize
+ *     responses:
+ *       201:
+ *         description: Game started successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 gameId:
+ *                   type: string
+ *                 board:
+ *                   type: array
+ *                   items:
+ *                     type: array
+ *                     items:
+ *                       type: string
+ *                       nullable: true
+ *                 currentPlayer:
+ *                   type: string
+ *                   enum: ['X', 'O']
+ *                 aiSymbol:
+ *                   type: string
+ *                   enum: ['X', 'O']
+ *                 gridSize:
+ *                   type: integer
+ *       400:
+ *         description: Invalid input
+ */
+router.post(
+  "/start",
+  [
+    body("mode").isIn(["ai"]),
+    body("playerSymbol").optional().isIn(["X", "O"]),
+    body("gridSize").isInt({ min: 3, max: 10 }),
+  ],
+  handleValidationErrors,
+  gameController.startGameAgainstAI
+);
+
+/**
+ * @swagger
+ * /api/game/{gameId}/move:
+ *   post:
+ *     summary: Make a player move in an ongoing game against AI and get AI's response
+ *     tags: [Game]
+ *     parameters:
+ *       - in: path
+ *         name: gameId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The ID of the game
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               row:
+ *                 type: integer
+ *               col:
+ *                 type: integer
+ *             required:
+ *               - row
+ *               - col
+ *     responses:
+ *       200:
+ *         description: Move processed, returns updated board and game status
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 board:
+ *                   type: array
+ *                   items:
+ *                     type: array
+ *                     items:
+ *                       type: string
+ *                       nullable: true
+ *                 currentPlayer:
+ *                   type: string
+ *                   enum: ['X', 'O']
+ *                 status:
+ *                   type: string
+ *                   enum: [ongoing, win, loss, draw]
+ *                 winner:
+ *                   type: string
+ *                   nullable: true
+ *                   enum: ['X', 'O', 'draw']
+ *                 aiSymbol:
+ *                   type: string
+ *                   enum: ['X', 'O']
+ *                 gridSize:
+ *                   type: integer
+ *       400:
+ *         description: Invalid input (e.g., invalid move, game not found)
+ *       404:
+ *         description: Game not found
+ */
+router.post(
+  "/:gameId/move",
+  [
+    body("row").isInt({ min: 0 }),
+    body("col").isInt({ min: 0 }),
+    // We might need to add validation for row/col against gridSize later,
+    // possibly in the controller or service layer after fetching game details.
+  ],
+  handleValidationErrors,
+  gameController.playerAIMove
+);
+
 export default router;
