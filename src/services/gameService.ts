@@ -106,6 +106,10 @@ export class GameService {
   ): Promise<StartAIGameResponse> {
     const { playerSymbol: requestedPlayerSymbol, gridSize } = request;
 
+    if (gridSize <= 0) {
+      throw new Error('Invalid grid size');
+    }
+
     const gameId = randomUUID();
     const humanSymbol = requestedPlayerSymbol || "X";
     const aiSymbol = humanSymbol === "X" ? "O" : "X";
@@ -226,9 +230,7 @@ export class GameService {
       aiMoveSuggestion.move.col >= game.gridSize ||
       game.board[aiMoveSuggestion.move.row][aiMoveSuggestion.move.col] !== null
     ) {
-      console.error(
-        "AI provided an invalid move or no move when one was expected."
-      );
+      throw new Error('AI provided an invalid move');
     }
 
     game.board[aiMoveSuggestion.move.row][aiMoveSuggestion.move.col] =
