@@ -1,0 +1,958 @@
+{
+	"info": {
+		"_postman_id": "e4610a6f-0a83-4a24-bc07-ed9ab64b4408",
+		"name": "Tic Tac Toe",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "838562"
+	},
+	"item": [
+		{
+			"name": "evaluate game state",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"gameState\": {\n    \"board\": [\n      [\"X\", \"O\", null],\n      [\"X\", \"O\", \"X\"],\n      [\"X\", null, \"O\"]\n    ],\n    \"currentPlayer\": \"O\",\n    \"gridSize\": 3\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/game/evaluate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"game",
+						"evaluate"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "OK",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"gameState\": {\n    \"board\": [\n      [\"X\", \"O\", null],\n      [null, \"X\", null]\n    ],\n    \"currentPlayer\": \"O\",\n    \"gridSize\": 3\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/game/evaluate",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"game",
+								"evaluate"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Security-Policy",
+							"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Cross-Origin-Resource-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Origin-Agent-Cluster",
+							"value": "?1"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "no-referrer"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15552000; includeSubDomains"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-DNS-Prefetch-Control",
+							"value": "off"
+						},
+						{
+							"key": "X-Download-Options",
+							"value": "noopen"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "X-Permitted-Cross-Domain-Policies",
+							"value": "none"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "129"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"81-5RfOktmCVBvdD1VFgo7PZ8fTEC0\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 05 Jun 2025 12:14:23 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"isGameOver\": true,\n    \"winner\": \"X\",\n    \"winningLine\": [\n        {\n            \"row\": 0,\n            \"col\": 0\n        },\n        {\n            \"row\": 1,\n            \"col\": 1\n        },\n        {\n            \"row\": 2,\n            \"col\": 2\n        }\n    ],\n    \"message\": \"Player X wins!\"\n}"
+				}
+			]
+		},
+		{
+			"name": "get completed games",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"gameState\": {\n    \"board\": [\n      [\n        null,\n        null,\n        null,\n        null,\n        null\n      ],\n      [\n        null,\n        null,\n        null,\n        null,\n        null\n      ],\n      [\n        null,\n        \"X\",\n        null,\n        null,\n        null\n      ],\n      [\n        null,\n        null,\n        null,\n        null,\n        null\n      ],\n      [\n        null,\n        null,\n        null,\n        null,\n        null\n      ]\n    ],\n    \"currentPlayer\": \"O\",\n    \"gridSize\": 5\n  }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/game/completed",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"game",
+						"completed"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "OK",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"gameState\": {\n    \"board\": [\n      [\n        null,\n        null,\n        null,\n        null,\n        null\n      ],\n      [\n        null,\n        null,\n        null,\n        null,\n        null\n      ],\n      [\n        null,\n        \"X\",\n        null,\n        null,\n        null\n      ],\n      [\n        null,\n        null,\n        null,\n        null,\n        null\n      ],\n      [\n        null,\n        null,\n        null,\n        null,\n        null\n      ]\n    ],\n    \"currentPlayer\": \"O\",\n    \"gridSize\": 5\n  }\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/game/completed",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"game",
+								"completed"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Security-Policy",
+							"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Cross-Origin-Resource-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Origin-Agent-Cluster",
+							"value": "?1"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "no-referrer"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15552000; includeSubDomains"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-DNS-Prefetch-Control",
+							"value": "off"
+						},
+						{
+							"key": "X-Download-Options",
+							"value": "noopen"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "X-Permitted-Cross-Domain-Policies",
+							"value": "none"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "342"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"156-kOQ8RJzOpMo+hA2Fl4Ddl0DGgMI\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 05 Jun 2025 12:16:11 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"games\": [\n        {\n            \"_id\": \"68418a1ffbdbf3afe2b1f873\",\n            \"winner\": \"X\",\n            \"gridSize\": 3,\n            \"finalBoard\": [\n                [\n                    \"X\",\n                    \"O\",\n                    null\n                ],\n                [\n                    null,\n                    \"X\",\n                    null\n                ],\n                [\n                    null,\n                    null,\n                    \"X\"\n                ]\n            ],\n            \"winningLine\": [\n                {\n                    \"row\": 0,\n                    \"col\": 0,\n                    \"_id\": \"68418a1ffbdbf3afe2b1f874\"\n                },\n                {\n                    \"row\": 1,\n                    \"col\": 1,\n                    \"_id\": \"68418a1ffbdbf3afe2b1f875\"\n                },\n                {\n                    \"row\": 2,\n                    \"col\": 2,\n                    \"_id\": \"68418a1ffbdbf3afe2b1f876\"\n                }\n            ],\n            \"createdAt\": \"2025-06-05T12:14:23.395Z\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "get AI move suggestion",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"gameState\": {\n    \"board\": [\n      [\"X\", \"X\", \"O\"],\n      [null, \"O\", \"O\"],\n      [null, \"X\", \"X\"]\n    ],\n    \"currentPlayer\": \"O\",\n    \"gridSize\": 3\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/game/ai-move",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"game",
+						"ai-move"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "400",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"gameState\": {\n    \"board\": [\n      [\"X\", \"X\", \"O\"],\n      [null, \"O\", \"O\"],\n      [\"X\", \"X\", \"X\"]\n    ],\n    \"currentPlayer\": \"O\",\n    \"gridSize\": 3\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/game/ai-move",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"game",
+								"ai-move"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Security-Policy",
+							"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Cross-Origin-Resource-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Origin-Agent-Cluster",
+							"value": "?1"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "no-referrer"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15552000; includeSubDomains"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-DNS-Prefetch-Control",
+							"value": "off"
+						},
+						{
+							"key": "X-Download-Options",
+							"value": "noopen"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "X-Permitted-Cross-Domain-Policies",
+							"value": "none"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "65"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"41-TPQTwACFUtiylDttBKtKj8dem6c\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 05 Jun 2025 14:22:45 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Cannot get AI move: game is already over. Winner: X\"\n}"
+				},
+				{
+					"name": "OK",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"gameState\": {\n    \"board\": [\n      [\"X\", \"X\", \"O\"],\n      [null, \"O\", \"O\"],\n      [null, \"X\", \"X\"]\n    ],\n    \"currentPlayer\": \"O\",\n    \"gridSize\": 3\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/game/ai-move",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"game",
+								"ai-move"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Security-Policy",
+							"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Cross-Origin-Resource-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Origin-Agent-Cluster",
+							"value": "?1"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "no-referrer"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15552000; includeSubDomains"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-DNS-Prefetch-Control",
+							"value": "off"
+						},
+						{
+							"key": "X-Download-Options",
+							"value": "noopen"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "X-Permitted-Cross-Domain-Policies",
+							"value": "none"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "26"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1a-xzFYKKJrj2YfomQw1FrTHDA3Mpw\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 05 Jun 2025 14:23:05 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"move\": {\n        \"row\": 2,\n        \"col\": 0\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "start a game against pot",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let response = pm.response.json();",
+							"pm.environment.set(\"gameId\", response.gameId);",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"mode\": \"ai\",\n  \"playerSymbol\": \"X\",\n  \"gridSize\": 3\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/game/start",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"game",
+						"start"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "OK 10 grid",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"mode\": \"ai\",\n  \"playerSymbol\": \"X\",\n  \"gridSize\": 10\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/game/start",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"game",
+								"start"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Security-Policy",
+							"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Cross-Origin-Resource-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Origin-Agent-Cluster",
+							"value": "?1"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "no-referrer"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15552000; includeSubDomains"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-DNS-Prefetch-Control",
+							"value": "off"
+						},
+						{
+							"key": "X-Download-Options",
+							"value": "noopen"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "X-Permitted-Cross-Domain-Policies",
+							"value": "none"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "628"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"274-0heyHrh48dQg6S2chRDVHVo/5cY\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 05 Jun 2025 14:24:36 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"gameId\": \"8daaf1f2-25fe-4d56-b97c-c469d90a6656\",\n    \"board\": [\n        [\n            null,\n            null,\n            null,\n            null,\n            null,\n            null,\n            null,\n            null,\n            null,\n            null\n        ],\n        [\n            null,\n            null,\n            null,\n            null,\n            null,\n            null,\n            null,\n            null,\n            null,\n            null\n        ],\n        [\n            null,\n            null,\n            null,\n            null,\n            null,\n            null,\n            null,\n            null,\n            null,\n            null\n        ],\n        [\n            null,\n            null,\n            null,\n            null,\n            null,\n            null,\n            null,\n            null,\n            null,\n            null\n        ],\n        [\n            null,\n            null,\n            null,\n            null,\n            null,\n            null,\n            null,\n            null,\n            null,\n            null\n        ],\n        [\n            null,\n            null,\n            null,\n            null,\n            null,\n            null,\n            null,\n            null,\n            null,\n            null\n        ],\n        [\n            null,\n            null,\n            null,\n            null,\n            null,\n            null,\n            null,\n            null,\n            null,\n            null\n        ],\n        [\n            null,\n            null,\n            null,\n            null,\n            null,\n            null,\n            null,\n            null,\n            null,\n            null\n        ],\n        [\n            null,\n            null,\n            null,\n            null,\n            null,\n            null,\n            null,\n            null,\n            null,\n            null\n        ],\n        [\n            null,\n            null,\n            null,\n            null,\n            null,\n            null,\n            null,\n            null,\n            null,\n            null\n        ]\n    ],\n    \"currentPlayer\": \"X\",\n    \"aiSymbol\": \"O\",\n    \"gridSize\": 10\n}"
+				},
+				{
+					"name": "OK 3 grid",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"mode\": \"ai\",\n  \"playerSymbol\": \"X\",\n  \"gridSize\": 3\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/game/start",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"game",
+								"start"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Security-Policy",
+							"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Cross-Origin-Resource-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Origin-Agent-Cluster",
+							"value": "?1"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "no-referrer"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15552000; includeSubDomains"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-DNS-Prefetch-Control",
+							"value": "off"
+						},
+						{
+							"key": "X-Download-Options",
+							"value": "noopen"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "X-Permitted-Cross-Domain-Policies",
+							"value": "none"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "158"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"9e-Qg4KkylYlfYhNiFiWeIn/BmJfnE\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 05 Jun 2025 14:30:14 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"gameId\": \"68565578-4346-44c3-b8f6-5bc622474f18\",\n    \"board\": [\n        [\n            null,\n            null,\n            null\n        ],\n        [\n            null,\n            null,\n            null\n        ],\n        [\n            null,\n            null,\n            null\n        ]\n    ],\n    \"currentPlayer\": \"X\",\n    \"aiSymbol\": \"O\",\n    \"gridSize\": 3\n}"
+				}
+			]
+		},
+		{
+			"name": "make a player move against pot",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"row\": 0,\n  \"col\": 0\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/game/{{gameId}}/move",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"game",
+						"{{gameId}}",
+						"move"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "OK",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"row\": 0,\n  \"col\": 0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/game/{{gameId}}/move",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"game",
+								"{{gameId}}",
+								"move"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Security-Policy",
+							"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Cross-Origin-Resource-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Origin-Agent-Cluster",
+							"value": "?1"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "no-referrer"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15552000; includeSubDomains"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-DNS-Prefetch-Control",
+							"value": "off"
+						},
+						{
+							"key": "X-Download-Options",
+							"value": "noopen"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "X-Permitted-Cross-Domain-Policies",
+							"value": "none"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "141"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"8d-wpqQE5GtP7ALrQvzc9HBP52gkeU\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 05 Jun 2025 14:31:02 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"board\": [\n        [\n            \"X\",\n            null,\n            \"O\"\n        ],\n        [\n            null,\n            null,\n            null\n        ],\n        [\n            null,\n            null,\n            null\n        ]\n    ],\n    \"currentPlayer\": \"X\",\n    \"status\": \"ongoing\",\n    \"winner\": null,\n    \"aiSymbol\": \"O\",\n    \"gridSize\": 3\n}"
+				}
+			]
+		}
+	]
+}
